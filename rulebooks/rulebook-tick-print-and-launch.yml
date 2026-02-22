@@ -1,0 +1,18 @@
+---
+- name: Generate events and act on the generated tick
+  hosts: localhost
+  ## Generate event every x (delay value) seconds.
+  sources:
+    - ansible.eda.tick:
+        delay: "{{ tick_delay | default(1) }}"
+  ## Define the conditions we are looking for
+  ## On the 5th Tick (5 Seconds with default Tic Value) - debug and Launch job template (Demo Job Template from Default Org with defaults)
+  rules:
+    - name: Debug and Launch a Job template when the 5th tick is reached
+      condition: event.i == 5
+      actions:
+        - debug:
+            msg: "5th Tick has been reached at {{ now(fmt='%H:%M:%S') }}"
+        - run_job_template:
+            name: "{{ job_templates_name | default('Demo Job Template') }}"
+            organization: "{{ job_templates_org_name | default('Default') }}"
