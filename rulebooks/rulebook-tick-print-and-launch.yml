@@ -12,7 +12,7 @@
       condition: event.i == 5
       actions:
         - debug:
-            msg: "5th Tick has been reached at {{ now(fmt='%H:%M:%S') }}"
+            msg: "5th Tick has been reached"
         - run_job_template:
             name: "{{ job_templates_name | default('Demo Job Template') }}"
             organization: "{{ job_templates_org_name | default('Default') }}"
