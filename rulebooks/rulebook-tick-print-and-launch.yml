@@ -16,3 +16,6 @@
         - run_job_template:
             name: "{{ job_templates_name | default('Demo Job Template') }}"
             organization: "{{ job_templates_org_name | default('Default') }}"
+        - shutdown:
+            delay: 1
+            message: Shutting down after 5 events
